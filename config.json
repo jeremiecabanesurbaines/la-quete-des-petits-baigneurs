@@ -1,1 +1,20 @@
-
+{
+  "enigmes": [
+    {
+      "id": 1,
+      "question": "Quel est le nom du célèbre casino de Châtelaillon ?",
+      "reponse": "eden",
+      "succes": "Bravo ! Vous avez débloqué l'image de la Grande Plage.",
+      "type_contenu": "image",
+      "url_contenu": "Lien_de_ton_image.jpg"
+    },
+    {
+      "id": 2,
+      "question": "En quelle année a été inaugurée la gare ?",
+      "reponse": "1893",
+      "succes": "Correct ! Voici une vidéo d'archive.",
+      "type_contenu": "video",
+      "url_contenu": "Lien_de_ta_video"
+    }
+  ]
+}
