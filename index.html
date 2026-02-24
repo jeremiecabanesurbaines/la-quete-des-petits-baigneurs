@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Quête des Petits Baigneurs</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Bienvenue dans La Quête des Petits Baigneurs</h1>
-    <p>Prêt à relever le défi ?</p>
-    <script src="js/script.js"></script>
+    <h1>La Quête des Petits Baigneurs</h1>
+    
+    <div id="enigme-container">
+        <h2 id="titre-enigme">Chargement de l'énigme...</h2>
+        <p id="texte-question"></p>
+        
+        <input type="text" id="reponse-joueur" placeholder="Votre réponse ici">
+        <button onclick="verifierReponse()">Valider</button>
+        
+        <p id="message-resultat"></p>
+        <div id="contenu-debloque"></div>
+    </div>
+
+    <script src="js/script.js"></script> 
 </body>
 </html>
