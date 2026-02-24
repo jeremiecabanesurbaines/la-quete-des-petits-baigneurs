@@ -1,1 +1,22 @@
-
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 20px;
+}
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.error { color: red; }
+.success { color: green; }
