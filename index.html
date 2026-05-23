@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Quête des Petits Baigneurs - Énigme</title>
+    <style>
+        /* Import d'une police de secours similaire si American Typewriter n'est pas installée sur la machine du joueur */
+        body {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .enigme-texte {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* Classes pour les différentes graisses (light, regular, bold) */
+        .fw-light { font-weight: 300; }
+        .fw-regular { font-weight: 400; }
+        .fw-bold { font-weight: bold; }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            width: 200px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        button {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        button:disabled, input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compteur {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #message-resultat {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        #message-resultat h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .erreur {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Moutarde Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
+
+        <p class="enigme-texte fw-regular">
+            Ils se sont <span class="fw-bold">pliés en 4</span>, pour faire venir le chemin de fer à Chatelaillon-les-Bains.
+        </p>
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Voici votre première règle de bonne conduite : <strong>La Purge Salée</strong></p>
+            <p><em>« Avant de s'y tremper, la mer se déguste ! »</em></p>
+            <p>Boire la tasse n'est pas un accident, c'est une prescription. Le curiste doit ingurgiter une rasade d'eau de mer (coupée au lait ou au vin rouge pour les palais délicats) afin de purger l'organisme. L'estomac doit être aussi agité que l'océan.</p>
+        </div>
+    </div>
+
+    <script>
+        // Paramètres du jeu
+        let tentativesRestantes = 4;
+        
+        // La ou les bonnes réponses (en minuscules pour faciliter la comparaison)
+        // La logique ici est que "pliés en 4" suggère le chiffre 4 ou le mot "quatre"
+        const reponsesAcceptees = ["4", "quatre"]; 
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            // Récupérer la réponse, enlever les espaces inutiles et mettre en minuscules
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; // Ne rien faire si le champ est vide
+
+            // Vérifier si la réponse est correcte
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                // Succès
+                document.getElementById("zone-saisie").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                // Échec
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                
+                // Nettoyer le champ pour réessayer
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    // Fin du jeu
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        // Permettre de valider en appuyant sur "Entrée"
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
