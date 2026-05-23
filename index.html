@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Quête des Petits Baigneurs - Énigme</title>
     <style>
-        /* Import d'une police de secours similaire si American Typewriter n'est pas installée sur la machine du joueur */
         body {
             font-family: "American Typewriter", "Courier New", Courier, serif;
             background-color: #ffffff;
@@ -36,7 +35,6 @@
             margin-bottom: 30px;
         }
 
-        /* Classes pour les différentes graisses (light, regular, bold) */
         .fw-light { font-weight: 300; }
         .fw-regular { font-weight: 400; }
         .fw-bold { font-weight: bold; }
@@ -51,7 +49,7 @@
             padding: 10px 15px;
             border: 2px solid #333;
             border-radius: 4px;
-            width: 200px;
+            width: 250px; /* Légèrement élargi pour les réponses longues */
             margin-bottom: 10px;
             outline: none;
         }
@@ -140,12 +138,10 @@
     </div>
 
     <script>
-        // Paramètres du jeu
         let tentativesRestantes = 4;
         
-        // La ou les bonnes réponses (en minuscules pour faciliter la comparaison)
-        // La logique ici est que "pliés en 4" suggère le chiffre 4 ou le mot "quatre"
-        const reponsesAcceptees = ["4", "quatre"]; 
+        // Liste des réponses acceptées (les chaînes textuelles doivent être écrites en minuscules ici)
+        const reponsesAcceptees = ["361", "trois cent soixante et un"]; 
 
         function verifierReponse() {
             const inputElement = document.getElementById("reponse-input");
@@ -154,29 +150,25 @@
             const msgResultat = document.getElementById("message-resultat");
             const nbEssaisElement = document.getElementById("nb-essais");
 
-            // Récupérer la réponse, enlever les espaces inutiles et mettre en minuscules
+            // Récupère la saisie, retire les espaces en trop au début/fin, et transforme en minuscules
             const reponseJoueur = inputElement.value.trim().toLowerCase();
 
-            if (reponseJoueur === "") return; // Ne rien faire si le champ est vide
+            if (reponseJoueur === "") return; 
 
-            // Vérifier si la réponse est correcte
+            // Vérification du résultat
             if (reponsesAcceptees.includes(reponseJoueur)) {
-                // Succès
                 document.getElementById("zone-saisie").style.display = "none";
                 document.getElementById("texte-compteur").style.display = "none";
                 msgErreur.style.display = "none";
                 msgResultat.style.display = "block";
             } else {
-                // Échec
                 tentativesRestantes--;
                 nbEssaisElement.textContent = tentativesRestantes;
                 msgErreur.style.display = "block";
                 
-                // Nettoyer le champ pour réessayer
                 inputElement.value = "";
 
                 if (tentativesRestantes <= 0) {
-                    // Fin du jeu
                     inputElement.disabled = true;
                     btnElement.disabled = true;
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
@@ -184,7 +176,6 @@
             }
         }
 
-        // Permettre de valider en appuyant sur "Entrée"
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
