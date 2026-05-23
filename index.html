@@ -116,4 +116,74 @@
         <img src="Moutarde Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
 
         <p class="enigme-texte fw-regular">
-            Ils se sont <span class="fw-bold">pliés en 4</span>, pour faire venir le chemin de fer à Chatelaillon-
+            Ils se sont <span class="fw-bold">pliés en 4</span>, pour faire venir le chemin de fer à Chatelaillon-les-Bains.
+        </p>
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Regardez cette gare qui se dresse devant vous ! Elle est le véritable point de départ de notre civilisation balnéaire. Sans l'arrivée providentielle du chemin de fer et de ces fameux "trains de plaisir" affrétés par la Compagnie des Charentes à la fin du 19ème siècle, Châtelaillon ne serait jamais devenue cette station si prisée. C'est le portail majestueux par lequel affluent tous nos illustres curistes. Juste ici, le parc de verdure constitue notre havre de paix mondain. Après le violent et traumatisant bain médical, la haute société vient y flâner pour se remettre de ses émotions. On y écoute la douce musique s'échappant des kiosques, on y discute des dernières rumeurs parisiennes. Mais attention, le tout doit se faire bien à l'abri sous des ombrelles épaisses !</p>
+            <p>Voici votre autre précepte.</p>
+            <p><strong>Le Culte du Teint de Navet !</strong></p>
+            <p>Le soleil est l'ennemi juré de notre aristocratie. Le bronzage de la peau est strictement réservé aux paysans et aux ouvriers agricoles ! Un curiste digne de ce nom se doit de cultiver avec soin une pâleur quasi cadavérique. Sur cette élégante promenade, les voiles superposés, les longues mitaines et les ombrelles sombres sont de rigueur absolue. Ne laissez passer aucun rayon mortel sur votre épiderme, sous peine d'une exclusion immédiate de nos cercles mondains !</p>
+        </div>
+    </div>
+
+    <script>
+        let tentativesRestantes = 4;
+        
+        // Liste des réponses acceptées (les chaînes textuelles doivent être écrites en minuscules ici)
+        const reponsesAcceptees = ["361", "trois cent soixante et un"]; 
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            // Récupère la saisie, retire les espaces en trop au début/fin, et transforme en minuscules
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; 
+
+            // Vérification du résultat
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                document.getElementById("zone-saisie").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
