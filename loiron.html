@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Quête des Petits Baigneurs - Énigme</title>
+    <style>
+        body {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
 
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .enigme-texte {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .fw-light { font-weight: 300; }
+        .fw-regular { font-weight: 400; }
+        .fw-bold { font-weight: bold; }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            width: 250px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        button {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        button:disabled, input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compteur {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #message-resultat {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        #message-resultat h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .erreur {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Orange Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
+
+        <p class="enigme-texte fw-regular">
+            Les bains de mer, n'est-ce pas là le <span class="fw-bold">SEL</span> de la vie ?
+        </p>
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Voici votre première règle de bonne conduite :</p>
+            <p>Avant l'arrivée de nos élégantes cabines de bain, cette côte charentaise n'était que rudesse ! Elle appartenait exclusivement aux marins pêcheurs et aux ostréiculteurs. Non loin de vous, au nord, le port du Loiron. Ses cabanes à carrelets témoignent encore de cette vie paysanne et maritime d'autrefois, bien loin de nos mondanités actuelles. Mais figurez-vous que ces marins robustes ont trouvé une toute nouvelle vocation florissante ! Ils sont devenus nos indispensables "guides-baigneurs". Attention toutefois, avec eux, point de délicatesse ou de manières de salon !</p>
+            <p>Ce qui nous amène à découvrir la toute première règle de notre prestigieux code de bonne conduite balnéaire.</p>
+            <p><strong>Le Baptême Brutal du Piqueux !</strong></p>
+            <p>Sachez que l'immersion timide de l'orteil est passible de lourdes sanctions. L'eau froide de l'Atlantique, cela se subit avec la plus grande bravoure ! Il est donc formellement interdit d'entrer dans l'eau à son propre rythme. Les "Piqueux", ces anciens marins aux bras noueux comme des cordages, vous attraperont fermement par les aisselles. Ils vous jetteront brutalement la tête la première sous la vague déferlante. C'est une manipulation absolument essentielle pour provoquer la fameuse "réaction salutaire" prescrite par nos médecins ! Ne criez pas, retenez votre souffle, c'est pour votre bien.</p>
+        </div>
+    </div>
+
+    <script>
+        let tentativesRestantes = 4;
+        
+        // Modification 3 : La réponse acceptée est maintenant "fleur"
+        const reponsesAcceptees = ["fleur"]; 
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; 
+
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                document.getElementById("zone-saisie").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
