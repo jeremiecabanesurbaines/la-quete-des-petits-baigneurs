@@ -35,7 +35,7 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 15px; /* Marge réduite pour rapprocher l'indice */
         }
 
         .audio-btn {
@@ -47,6 +47,15 @@
 
         .audio-btn:hover {
             transform: scale(1.1);
+        }
+        
+        /* Style pour l'indice audio */
+        .indice-audio {
+            font-size: 1rem;
+            font-style: italic;
+            color: #555555;
+            margin-top: 0;
+            margin-bottom: 25px;
         }
 
         .fw-light { font-weight: 300; }
@@ -135,6 +144,8 @@
             <img src="Play0.png" alt="Jouer l'extrait" class="audio-btn" onclick="jouerAudio()">
             <img src="Stop0.png" alt="Arrêter l'extrait" class="audio-btn" onclick="stopperAudio()">
         </div>
+        
+        <p class="indice-audio" id="texte-indice-audio">Vos yeux ne suffiront pas ici. Mettez le son</p>
 
         <div class="input-group" id="zone-saisie">
             <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
@@ -186,6 +197,7 @@
                 
                 document.getElementById("zone-saisie").style.display = "none";
                 document.getElementById("zone-audio").style.display = "none";
+                document.getElementById("texte-indice-audio").style.display = "none"; // Cache la phrase d'indice
                 document.getElementById("texte-compteur").style.display = "none";
                 msgErreur.style.display = "none";
                 msgResultat.style.display = "block";
