@@ -158,4 +158,59 @@
     <script>
         let tentativesRestantes = 4;
         
-        const reponses
+        const reponsesAcceptees = ["auclair de la lune", "au clair de la lune"]; 
+
+        const audio = document.getElementById("enigme-audio");
+
+        function jouerAudio() {
+            audio.play();
+        }
+
+        function stopperAudio() {
+            audio.pause();
+        }
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; 
+
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                stopperAudio(); 
+                
+                document.getElementById("zone-saisie").style.display = "none";
+                document.getElementById("zone-audio").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
