@@ -29,12 +29,178 @@
             margin-bottom: 30px;
         }
 
-        /* --- Animation de l'énigme --- */
+        /* --- Enigme et Animation --- */
         .enigme-texte {
             font-size: 1.2rem;
             line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .fw-light { font-weight: 300; }
+        .fw-regular { font-weight: 400; }
+        .fw-bold { font-weight: bold; }
+
+        .animation-ligne {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            min-height: 1.5em; /* Évite les sauts de page pendant l'animation */
+        }
+
+        .word-superstition {
+            position: relative;
+            display: inline-block;
+            font-weight: 400; /* Même graisse (regular) que la phrase */
+        }
+
+        /* Le trait qui vient barrer le mot "superstition" */
+        .word-superstition::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 55%;
+            width: 0;
+            height: 2px;
+            background-color: #333;
+            animation: strike-anim 9s infinite;
+        }
+
+        /* Le mot "superposition" masqué au début */
+        .word-superposition {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            vertical-align: bottom;
+            margin-left: 8px;
+            max-width: 0;
+            opacity: 0;
+            animation: type-anim 9s infinite;
+        }
+
+        /* Déroulement de l'animation sur 9 secondes */
+        @keyframes strike-anim {
+            0%, 33.33% { width: 0; } /* Temps 1 : Pas de trait */
+            33.34%, 100% { width: 100%; } /* Temps 2 et 3 : Mot barré */
+        }
+
+        @keyframes type-anim {
+            0%, 33.33% { max-width: 0; opacity: 0; } /* Temps 1 : Caché */
+            33.34% { max-width: 0; opacity: 1; } /* Début du temps 2 : Devient visible mais largeur 0 */
+            66.66%, 100% { max-width: 200px; opacity: 1; } /* Temps 2 et 3 : S'affiche lettre à lettre jusqu'à la taille max */
+        }
+
+        /* --- Visuel réduit --- */
+        .visuel-enigme {
+            max-width: 150px; /* Taille diminuée */
+            margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            width: 250px;
             margin-bottom: 10px;
-            height: 3em; /* Espace réservé pour éviter les sauts de page */
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        button {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        button:disabled, input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compteur {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #message-resultat {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        #message-resultat h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .erreur {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Turquoise Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
+
+        <div class="enigme-texte fw-regular">
+            Parfois, tout est histoire de<br>
+            <div class="animation-ligne">
+                <span class="word-superstition">superstition</span>
+                <span class="word-superposition fw-bold">superposition</span>
+            </div>
+        </div>
+
+        <img src="Visuel + -.png" alt="Visuel" class="visuel-enigme">
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Ah, le Casino de Châtelaillon ! Même si son architecture a été modernisée avec le temps, son emplacement stratégique et son concept sont l'héritage direct des grands établissements de notre chère Belle Époque. C'est notre prestigieux lieu de perdition élégant, le cœur battant de nos soirées festives. C'est surtout ici que ces messieurs se retirent prudemment pour fumer le cigare et jouer aux cartes. Surtout lorsque l'heure redoutée de la baignade féminine approche sur la plage !</p>
+            <p>Ce qui nous amène tout naturellement à vous dicter la règle suivante de notre sacro-saint code.</p>
+            <p><strong>La Cloche de la Vertu et le Péril de la Lorgnette !</strong></p>
+            <p>Sachez que la mixité aquatique est le naufrage absolu de la moralité française. Nos plages sont très strictement séparées par sexe. Lorsqu'une lourde cloche retentit au loin pour annoncer le            height: 3em; /* Espace réservé pour éviter les sauts de page */
             display: flex;
             justify-content: center;
             align-items: center;
