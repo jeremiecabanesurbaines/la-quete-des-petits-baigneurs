@@ -36,11 +36,11 @@
         }
 
         .visuel-enigme {
-            max-width: 100%; /* S'adapte à la largeur de l'écran */
+            max-width: 100%;
             height: auto;
             border-radius: 4px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Petit effet d'ombre élégant */
+            margin-bottom: 20px; /* Légèrement réduit pour rapprocher le texte */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .fw-light { font-weight: 300; }
@@ -49,6 +49,14 @@
 
         .input-group {
             margin-bottom: 20px;
+        }
+        
+        .indice-format {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #555555;
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
         input[type="text"] {
@@ -123,13 +131,15 @@
     <div class="container">
         <img src="Vert Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
 
-        <p class="enigme-texte fw-bold">
+        <p class="enigme-texte fw-regular">
             Quel est le jour de baignade de ces adeptes de marée haute ?
         </p>
 
         <img src="jour-de-baignade.png" alt="Photo de baignade" class="visuel-enigme">
 
         <div class="input-group" id="zone-saisie">
+            <p class="indice-format">jour (lettre), n° de jour (chiffre), mois (lettre)</p>
+            
             <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
             <br>
             <button id="btn-valider" onclick="verifierReponse()">Valider</button>
@@ -151,7 +161,6 @@
     <script>
         let tentativesRestantes = 4;
         
-        // Modification 4 : Les différentes réponses acceptées
         const reponsesAcceptees = ["jeudi 2 juillet", "2/7/1921", "02/07/1921"]; 
 
         function verifierReponse() {
