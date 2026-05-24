@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Quête des Petits Baigneurs - Énigme</title>
+    <style>
+        body {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Animation "Tomber du ciel et rebond" --- */
+        .enigme-texte {
+            font-size: 3rem; /* Texte plus grand pour l'effet visuel */
+            font-weight: bold;
+            margin-bottom: 20px;
+            height: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .enigme-texte span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-300px);
+            animation: fall-bounce 3s infinite ease-in-out;
+        }
+
+        @keyframes fall-bounce {
+            0% { opacity: 0; transform: translateY(-300px); }
+            10% { opacity: 1; transform: translateY(0); } /* Chute */
+            15% { transform: translateY(-20px); } /* Rebond 1 */
+            20% { transform: translateY(0); }
+            25% { transform: translateY(-10px); } /* Rebond 2 */
+            30% { transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); } /* Reste au sol */
+            90%, 100% { opacity: 0; transform: translateY(0); } /* Disparition avant boucle */
+        }
+
+        /* Décalage pour l'apparition un par un */
+        .char-1 { animation-delay: 0.1s !important; }
+        .char-2 { animation-delay: 0.2s !important; }
+        .char-3 { animation-delay: 0.3s !important; }
+        .char-4 { animation-delay: 0.4s !important; }
+        .char-5 { animation-delay: 0.5s !important; }
+        .char-6 { animation-delay: 0.6s !important; }
+
+        /* --- Visuel --- */
+        .visuel-enigme {
+            max-width: 250px;
+            margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            width: 250px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        button {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        button:disabled, input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compteur {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #message-resultat {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        #message-resultat h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .erreur {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Rose Logo petits baigneurs0.png" alt="Logo" class="logo">
+
+        <div class="enigme-texte">
+            <span class="char-1">1</span>
+            <span class="char-2">3</span>
+            <span class="char-3">5</span>
+            <span class="char-4">°</span>
+            <span class="char-5">&nbsp;</span>
+            <span class="char-6">?</span>
+        </div>
+
+        <img src="Visuel 3 ancres.png" alt="Visuel" class="visuel-enigme">
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Ici, le courageux curiste contemple avec effroi le champ de bataille mouvant de sa propre thérapie ! Comprenez bien que la mer n'est pas votre amie, c'est un remède brutal. Elle est glaciale, totalement imprévisible et férocement revigorante. Et ce traitement de choc obéit à des lois et des mathématiques médicales extrêmement strictes.</p>
+            <p>Voici donc le moment de découvrir :</p>
+            <p><strong>L'Ordonnance des Trois Vagues !</strong></p>
+            <p>Je me permets de vous le rappeler vigoureusement : la flânerie aquatique est une dangereuse hérésie. Le bain de mer est un traitement médical violent, une épreuve redoutable pour le corps humain. Le temps d'immersion est scrupuleusement chronométré par nos spécialistes en blouse blanche. Trois à cinq minutes au très grand maximum ! Ou, pour être cliniquement exact : le temps nécessaire pour subir très précisément "trois vagues" s'écrasant sur le sommet de votre crâne. Au-delà de cette dose saline prescrite, le pauvre baigneur risque tout simplement la mort foudroyante par épuisement. Fuyez l'eau et regagnez le sable dès la troisième déferlante !</p>
+        </div>
+    </div>
+
+    <script>
+        let tentativesRestantes = 4;
+        
+        // Le code accepte 12 ou douze (le toLowerCase gère les majuscules)
+        const reponsesAcceptees = ["12", "douze"]; 
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; 
+
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                document.getElementById("zone-saisie").style.display = "none";
+                document.querySelector(".enigme-texte").style.display = "none";
+                document.querySelector(".visuel-enigme").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
