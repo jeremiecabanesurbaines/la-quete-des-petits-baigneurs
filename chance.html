@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Quête des Petits Baigneurs - Énigme</title>
+    <style>
+        body {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
 
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Animation de l'énigme --- */
+        .enigme-texte {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            height: 3em; /* Espace réservé pour éviter les sauts de page */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .word-wrapper {
+            position: relative;
+            display: inline-block;
+            text-align: left;
+            width: 140px; /* Largeur pour contenir les mots */
+            margin-left: 5px;
+            vertical-align: bottom;
+        }
+
+        .word-1, .word-2 {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            white-space: nowrap;
+        }
+
+        /* Animation sur 9 secondes (3x3s) */
+        .word-1 {
+            animation: toggleWord1 9s infinite;
+        }
+
+        .word-2 {
+            animation: toggleWord2 9s infinite;
+        }
+
+        @keyframes toggleWord1 {
+            0%, 33.33% { opacity: 1; }    /* Temps 1 : visible */
+            36.66%, 100% { opacity: 0; }  /* Temps 2 et 3 : invisible */
+        }
+
+        @keyframes toggleWord2 {
+            0%, 66.66% { opacity: 0; }    /* Temps 1 et 2 : invisible */
+            70%, 100% { opacity: 1; }     /* Temps 3 : visible */
+        }
+
+        /* --- Visuel image --- */
+        .visuel-enigme {
+            max-width: 300px;
+            margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .fw-bold { font-weight: bold; }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            width: 250px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        button {
+            font-family: "American Typewriter", "Courier New", Courier, serif;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        button:disabled, input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compteur {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #message-resultat {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        .erreur {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Turquoise Logo petits baigneurs0.png" alt="Logo" class="logo">
+
+        <div class="enigme-texte">
+            <span>Parfois, tout est histoire de </span>
+            <span class="word-wrapper">
+                <span class="word-1 fw-bold">superstition</span>
+                <span class="word-2 fw-bold">superposition</span>
+            </span>
+        </div>
+
+        <img src="Visuel + -.png" alt="Visuel" class="visuel-enigme">
+
+        <div class="input-group" id="zone-saisie">
+            <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
+            <br>
+            <button id="btn-valider" onclick="verifierReponse()">Valider</button>
+        </div>
+
+        <p class="compteur" id="texte-compteur">Tentatives restantes : <span id="nb-essais">4</span></p>
+
+        <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
+
+        <div id="message-resultat">
+            <h3>Bravo !</h3>
+            <p>Ah, le Casino de Châtelaillon ! Même si son architecture a été modernisée avec le temps, son emplacement stratégique et son concept sont l'héritage direct des grands établissements de notre chère Belle Époque. C'est notre prestigieux lieu de perdition élégant, le cœur battant de nos soirées festives. C'est surtout ici que ces messieurs se retirent prudemment pour fumer le cigare et jouer aux cartes. Surtout lorsque l'heure redoutée de la baignade féminine approche sur la plage !</p>
+            <p>Ce qui nous amène tout naturellement à vous dicter la règle suivante de notre sacro-saint code.</p>
+            <p><strong>La Cloche de la Vertu et le Péril de la Lorgnette !</strong></p>
+            <p>Sachez que la mixité aquatique est le naufrage absolu de la moralité française. Nos plages sont très strictement séparées par sexe. Lorsqu'une lourde cloche retentit au loin pour annoncer le bain exclusif des Dames, les Messieurs ont l'obligation absolue de tourner le dos à l'océan. Ils fileront se réfugier au Casino sans le moindre délai ! De plus, prenez garde : la longue-vue est considérée comme l'instrument du Diable en personne. L'usage de jumelles, de lorgnons ou de tout autre artifice d'optique pointé perfidement vers les cabines des dames est un crime de lèse-pudeur sévèrement réprimé !</p>
+        </div>
+    </div>
+
+    <script>
+        let tentativesRestantes = 4;
+        const reponsesAcceptees = ["9"]; 
+
+        function verifierReponse() {
+            const inputElement = document.getElementById("reponse-input");
+            const btnElement = document.getElementById("btn-valider");
+            const msgErreur = document.getElementById("message-erreur");
+            const msgResultat = document.getElementById("message-resultat");
+            const nbEssaisElement = document.getElementById("nb-essais");
+
+            const reponseJoueur = inputElement.value.trim().toLowerCase();
+
+            if (reponseJoueur === "") return; 
+
+            if (reponsesAcceptees.includes(reponseJoueur)) {
+                document.getElementById("zone-saisie").style.display = "none";
+                document.querySelector(".enigme-texte").style.display = "none";
+                document.querySelector(".visuel-enigme").style.display = "none";
+                document.getElementById("texte-compteur").style.display = "none";
+                msgErreur.style.display = "none";
+                msgResultat.style.display = "block";
+            } else {
+                tentativesRestantes--;
+                nbEssaisElement.textContent = tentativesRestantes;
+                msgErreur.style.display = "block";
+                inputElement.value = "";
+
+                if (tentativesRestantes <= 0) {
+                    inputElement.disabled = true;
+                    btnElement.disabled = true;
+                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
+                }
+            }
+        }
+
+        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifierReponse();
+            }
+        });
+    </script>
+
+</body>
+</html>
