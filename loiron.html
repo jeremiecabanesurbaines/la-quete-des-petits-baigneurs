@@ -35,6 +35,21 @@
             margin-bottom: 30px;
         }
 
+        /* --- Animation Tilt --- */
+        .tilt-anim {
+            display: inline-block; /* Requis pour appliquer une transformation (rotation) sur du texte */
+            animation: tilt 3s infinite ease-in-out;
+        }
+
+        @keyframes tilt {
+            0%, 100% { transform: rotate(0deg); }
+            5% { transform: rotate(-15deg); }
+            10% { transform: rotate(15deg); }
+            15% { transform: rotate(-10deg); }
+            20% { transform: rotate(10deg); }
+            25%, 100% { transform: rotate(0deg); } /* L'animation s'arrête ici et attend la fin des 3s pour recommencer */
+        }
+
         .fw-light { font-weight: 300; }
         .fw-regular { font-weight: 400; }
         .fw-bold { font-weight: bold; }
@@ -116,7 +131,7 @@
         <img src="Orange Logo petits baigneurs0.png" alt="Logo La Quête des Petits Baigneurs" class="logo">
 
         <p class="enigme-texte fw-regular">
-            Les bains de mer, n'est-ce pas là le <span class="fw-bold">SEL</span> de la vie ?
+            Les bains de mer, n'est-ce pas là le <span class="tilt-anim">SEL</span> de la vie ?
         </p>
 
         <div class="input-group" id="zone-saisie">
