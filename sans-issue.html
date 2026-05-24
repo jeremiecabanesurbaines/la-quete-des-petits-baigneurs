@@ -34,19 +34,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Espace entre les boutons */
+            gap: 20px;
             margin-bottom: 30px;
         }
 
         .audio-btn {
             cursor: pointer;
-            width: 60px; /* Taille des boutons Play/Stop */
+            width: 60px;
             height: auto;
             transition: transform 0.2s ease;
         }
 
         .audio-btn:hover {
-            transform: scale(1.1); /* Petit effet de zoom au survol */
+            transform: scale(1.1);
         }
 
         .fw-light { font-weight: 300; }
@@ -158,64 +158,4 @@
     <script>
         let tentativesRestantes = 4;
         
-        // Modification 4 : Accepte "auclair de la lune" et "au clair de la lune"
-        const reponsesAcceptees = ["auclair de la lune", "au clair de la lune"]; 
-
-        // Gestion de l'audio
-        const audio = document.getElementById("enigme-audio");
-
-        function jouerAudio() {
-            audio.currentTime = 0; // Recommence du début
-            audio.play();
-        }
-
-        function stopperAudio() {
-            audio.pause();
-            audio.currentTime = 0; // Remet à zéro pour la prochaine lecture
-        }
-
-        function verifierReponse() {
-            const inputElement = document.getElementById("reponse-input");
-            const btnElement = document.getElementById("btn-valider");
-            const msgErreur = document.getElementById("message-erreur");
-            const msgResultat = document.getElementById("message-resultat");
-            const nbEssaisElement = document.getElementById("nb-essais");
-
-            const reponseJoueur = inputElement.value.trim().toLowerCase();
-
-            if (reponseJoueur === "") return; 
-
-            if (reponsesAcceptees.includes(reponseJoueur)) {
-                // Arrêter la musique si elle est encore en cours quand le joueur trouve la bonne réponse
-                stopperAudio(); 
-                
-                document.getElementById("zone-saisie").style.display = "none";
-                document.getElementById("zone-audio").style.display = "none"; // Cache les boutons audio
-                document.getElementById("texte-compteur").style.display = "none";
-                msgErreur.style.display = "none";
-                msgResultat.style.display = "block";
-            } else {
-                tentativesRestantes--;
-                nbEssaisElement.textContent = tentativesRestantes;
-                msgErreur.style.display = "block";
-                
-                inputElement.value = "";
-
-                if (tentativesRestantes <= 0) {
-                    inputElement.disabled = true;
-                    btnElement.disabled = true;
-                    msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
-                }
-            }
-        }
-
-        document.getElementById("reponse-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                verifierReponse();
-            }
-        });
-    </script>
-
-</body>
-</html>
+        const reponses
