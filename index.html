@@ -32,7 +32,15 @@
         .enigme-texte {
             font-size: 1.2rem;
             line-height: 1.5;
+            margin-bottom: 20px; /* Légèrement réduit pour rapprocher l'image */
+        }
+        
+        /* Nouveau style pour le visuel ajouté */
+        .visuel-enigme {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 30px;
+            border-radius: 8px; /* Optionnel : arrondit légèrement les bords */
         }
 
         .fw-light { font-weight: 300; }
@@ -118,6 +126,8 @@
         <p class="enigme-texte fw-regular">
             Ils se sont <span class="fw-bold">pliés en 4</span>, pour faire venir le chemin de fer à Chatelaillon-les-Bains.
         </p>
+
+        <img src="Ordre-cercles_10.png" alt="Indice visuel de l'énigme" class="visuel-enigme">
 
         <div class="input-group" id="zone-saisie">
             <input type="text" id="reponse-input" placeholder="Saisissez votre réponse">
