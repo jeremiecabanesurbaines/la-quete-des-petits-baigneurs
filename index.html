@@ -32,15 +32,16 @@
         .enigme-texte {
             font-size: 1.2rem;
             line-height: 1.5;
-            margin-bottom: 20px; /* Légèrement réduit pour rapprocher l'image */
+            margin-bottom: 20px;
         }
         
-        /* Nouveau style pour le visuel ajouté */
+        /* C'EST ICI QUE LA TAILLE DE L'IMAGE EST RÉDUITE */
         .visuel-enigme {
-            max-width: 100%;
+            max-width: 250px; /* <--- Vous pouvez modifier ce nombre (ex: 150px pour plus petit, 350px pour plus grand) */
+            width: 100%;
             height: auto;
             margin-bottom: 30px;
-            border-radius: 8px; /* Optionnel : arrondit légèrement les bords */
+            border-radius: 8px;
         }
 
         .fw-light { font-weight: 300; }
@@ -57,7 +58,7 @@
             padding: 10px 15px;
             border: 2px solid #333;
             border-radius: 4px;
-            width: 250px; /* Légèrement élargi pour les réponses longues */
+            width: 250px;
             margin-bottom: 10px;
             outline: none;
         }
@@ -151,7 +152,6 @@
     <script>
         let tentativesRestantes = 4;
         
-        // Liste des réponses acceptées (les chaînes textuelles doivent être écrites en minuscules ici)
         const reponsesAcceptees = ["361", "trois cent soixante et un"]; 
 
         function verifierReponse() {
@@ -161,12 +161,10 @@
             const msgResultat = document.getElementById("message-resultat");
             const nbEssaisElement = document.getElementById("nb-essais");
 
-            // Récupère la saisie, retire les espaces en trop au début/fin, et transforme en minuscules
             const reponseJoueur = inputElement.value.trim().toLowerCase();
 
             if (reponseJoueur === "") return; 
 
-            // Vérification du résultat
             if (reponsesAcceptees.includes(reponseJoueur)) {
                 document.getElementById("zone-saisie").style.display = "none";
                 document.getElementById("texte-compteur").style.display = "none";
