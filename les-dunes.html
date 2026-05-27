@@ -22,6 +22,8 @@
         .container {
             max-width: 600px;
             padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .logo {
@@ -49,9 +51,11 @@
             padding: 10px 15px;
             border: 2px solid #333;
             border-radius: 4px;
-            width: 250px;
+            width: 100%;
+            max-width: 250px;
             margin-bottom: 10px;
             outline: none;
+            box-sizing: border-box;
         }
 
         input[type="text"]::placeholder {
@@ -94,12 +98,25 @@
             padding: 20px;
             border: 1px solid #333;
             background-color: #f9f9f9;
-            text-align: left;
+            text-align: center;
         }
 
         #message-resultat h3 {
             margin-top: 0;
-            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Nouveaux styles pour la vidéo */
+        .video-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        video, iframe {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .erreur {
@@ -129,18 +146,26 @@
 
         <div id="message-erreur" class="erreur">Mauvaise réponse. Essayez encore !</div>
 
+        <!-- ZONE DE RÉSULTAT MODIFIÉE AVEC LA VIDÉO -->
         <div id="message-resultat">
             <h3>Bravo !</h3>
-            <p>Notre merveilleuse cité balnéaire connait depuis le début du siècle un développement phénoménal et ininterrompu. De très nombreuses villas sortent de terre et rivalisent d'audace architecturale. Mais face à vous se dresse l'une des plus remarquables : la majestueuse Villa des Dunes. Remarquez immédiatement son style « castel » si particulier et si prisé ! Ses volumes très imposants rappellent fièrement l'allure d'un petit château fortifié de bord de mer. Observez sa façade d'un rouge éclatant qui défie l'océan avec arrogance. Admirez également ses fins lambrequins, ces délicates bordures décoratives en bois finement découpées qui habillent l'avancée de son toit. À l'image précise de cette architecture robuste et inébranlable, le baigneur doit être solidement équipé pour affronter les éléments.</p>
-            <p>Notez bien la règle de : <strong>L'Armure de Laine Mouillée !</strong></p>
-            <p>Le vêtement de bain se doit impérativement de peser le poids d'un âne mort une fois gorgé d'eau. La lourde cuirasse de sergé de laine sombre est obligatoire pour éviter la moindre transparence indécente. Mesdames, n'oubliez surtout pas de coudre d'épais poids en plomb dans l'ourlet inférieur de votre jupe ! Elle ne doit jamais flotter à la surface, et un corset de bain rigide vous garantira un port de tête altier face à la vague destructrice.</p>
+            
+            <div class="video-container">
+                <!-- Option 1 : Vidéo hébergée sur GitHub (Fichier local) -->
+                <video controls width="500">
+                    <source src="Test-video-les-dune.mp4" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la lecture de vidéos.
+                </video>
+
+                <!-- Option 2 : Si vous utilisez YouTube ou Vimeo, effacez les balises <video> ci-dessus et collez votre <iframe> ici -->
+            </div>
+
         </div>
     </div>
 
     <script>
         let tentativesRestantes = 4;
         
-        // La réponse acceptée est "pudeur" (le toLowerCase gère toutes les variations de casse)
         const reponsesAcceptees = ["pudeur"]; 
 
         function verifierReponse() {
