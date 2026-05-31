@@ -108,6 +108,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -136,6 +152,14 @@
             <p>Voilà une règle fondamentale.</p>
             <p><strong>Le Cheval des Mers !</strong></p>
             <p>Fouler le sable chaud en costume de bain est considéré comme un affront intolérable aux mouettes et, surtout, aux bonnes mœurs. L'approche des flots tumultueux doit se faire dans la plus stricte intimité. Le baigneur de bonne famille monte, entièrement habillé de la tête aux pieds, dans une cabine de bois montée sur roues. Un cheval de trait robuste tracte ensuite cette cabine bringuebalante jusque dans l'écume marine. Vous ne sortirez de cet abri que du côté du grand large ! Loin, très loin des regards terrestres, des jumelles indiscrètes et des villageois ébahis. La pudeur avant tout, messieurs-dames, la dignité de votre rang en dépend !</p>
+
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>Le chiffre de la quatrième molette est strictement inférieur à celui de la troisième.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -173,6 +197,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
