@@ -108,6 +108,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -131,18 +147,24 @@
 
         <div id="message-resultat">
             <h3>Bravo !</h3>
-            <p>Nous terminons enfin notre grande promenade thérapeutique ici, aux Boucholeurs. Respirez à pleins poumons ces puissants effluves marins ! Ce quartier très pittoresque vit au rythme immuable des marées, du dur labeur de la mytiliculture et de l'ostréiculture. L'océan tumultueux nous nourrit de ses fruits, mais sachez qu'il nous purge également de nos maux ! Cette même eau salée qui donne une saveur si incomparable à nos huîtres possède d'incroyables vertus stomacales prouvées par la science.</p>
-            <p>C'est l'heure de noter votre ultime et délicieuse recommandation médicale pour le code de conduite.</p>
+            <p>Nous terminons enfin notre grande promenade thérapeutique ici, aux Boucholeurs. Respirez à pleins poumons ces puissants effluves marins ! Ce quartier très pittoresque vit au rythme immuable des marées, du dur labeur de la mytiliculture et de l'ostréiculture. L'océan tumultueux nous nourrit de ses fruits, mais sachez qu'il nous purge également de nos maux ! Cette même eau salée qui donne une saveur si incomparable à nos huîtres possède d'incroyables vertus stomacales prouvées par la science. </p>
+            <p>Voici l’ultime et délicieuse recommandation médicale :</p>
             <p><strong>La Purge Salée !</strong></p>
-            <p>N'oubliez jamais qu'avant de s'y tremper, la mer se déguste goulûment ! Boire la tasse n'est jamais un vulgaire accident stupide dû à une vague, c'est une véritable prescription officielle. Tout curiste arrivant sur nos rivages doit impérativement ingurgiter une généreuse rasade d'eau de mer bien trouble. Vous êtes exceptionnellement autorisés à la couper au lait tiède ou au vin rouge si votre palais bourgeois est trop délicat. L'objectif avoué est de purger intégralement votre organisme. Votre estomac mondain doit rapidement devenir aussi agité que l'océan lors d'une violente tempête d'équinoxe !</p>
+            <p>N'oubliez jamais qu'avant de s'y tremper, la mer se déguste goulûment ! Boire la tasse n'est jamais un vulgaire accident stupide dû à une vague, c'est une véritable prescription officielle. Tout curiste arrivant sur nos rivages doit impérativement ingurgiter une généreuse rasade d'eau de mer bien trouble. Vous êtes exceptionnellement autorisés à la couper au lait tiède ou au vin rouge si votre palais bourgeois est trop délicat. L'objectif avoué est de purger intégralement votre organisme. Votre estomac mondain doit rapidement devenir aussi agité que l'océan lors d'une violente tempête d'équinoxe ! </p>
             <p>Bonne cure à tous !</p>
+
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>Le chiffre de la deuxième molette est strictement supérieur à 5.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         let tentativesRestantes = 4;
-        
-        // Modification 3 : La réponse acceptée est maintenant "esprit"
         const reponsesAcceptees = ["esprit"]; 
 
         function verifierReponse() {
@@ -174,6 +196,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice final
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
