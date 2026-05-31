@@ -108,6 +108,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -131,9 +147,17 @@
 
         <div id="message-resultat">
             <h3>Bravo !</h3>
-            <p>Notre merveilleuse cité balnéaire connait depuis le début du siècle un développement phénoménal et ininterrompu. De très nombreuses villas sortent de terre et rivalisent d'audace architecturale. Mais face à vous se dresse l'une des plus remarquables : la majestueuse Villa des Dunes. Remarquez immédiatement son style « castel » si particulier et si prisé ! Ses volumes très imposants rappellent fièrement l'allure d'un petit château fortifié de bord de mer. Observez sa façade d'un rouge éclatant qui défie l'océan avec arrogance. Admirez également ses fins lambrequins, ces délicates bordures décoratives en bois finement découpées qui habillent l'avancée de son toit. À l'image précise de cette architecture robuste et inébranlable, le baigneur doit être solidement équipé pour affronter les éléments.</p>
-            <p>Notez bien la règle de : <strong>L'Armure de Laine Mouillée !</strong></p>
+            <p>Notre merveilleuse cité balnéaire connait depuis le début du siècle un développement phénoménal et ininterrompu. De très nombreuses villas sortent de terre et rivalisent d'audace architecturale. Face à vous se dresse l'une des plus remarquables : la majestueuse Villa des Dunes. Remarquez immédiatement son style « castel » si particulier et si prisé ! Ses volumes très imposants rappellent fièrement l'allure d'un petit château fortifié de bord de mer. Observez sa façade d'un rouge éclatant qui défie l'océan avec arrogance. Admirez également ses fins lambrequins, ces délicates bordures décoratives en bois finement découpées qui habillent l'avancée de son toit. À l'image précise de cette architecture robuste et inébranlable, le baigneur doit être solidement équipé pour affronter les éléments.</p>
+            <p>Notez bien la règle de <strong>L'Armure de Laine Mouillée !</strong></p>
             <p>Le vêtement de bain se doit impérativement de peser le poids d'un âne mort une fois gorgé d'eau. La lourde cuirasse de sergé de laine sombre est obligatoire pour éviter la moindre transparence indécente. Mesdames, n'oubliez surtout pas de coudre d'épais poids en plomb dans l'ourlet inférieur de votre jupe ! Elle ne doit jamais flotter à la surface, et un corset de bain rigide vous garantira un port de tête altier face à la vague destructrice.</p>
+            
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>La première molette est strictement inférieure à la troisième molette.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -173,6 +197,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
