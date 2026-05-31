@@ -168,6 +168,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -198,9 +214,17 @@
         <div id="message-resultat">
             <h3>Bravo !</h3>
             <p>Ah, le Casino de Châtelaillon ! Même si son architecture a été modernisée avec le temps, son emplacement stratégique et son concept sont l'héritage direct des grands établissements de notre chère Belle Époque. C'est notre prestigieux lieu de perdition élégant, le cœur battant de nos soirées festives. C'est surtout ici que ces messieurs se retirent prudemment pour fumer le cigare et jouer aux cartes. Surtout lorsque l'heure redoutée de la baignade féminine approche sur la plage !</p>
-            <p>Ce qui nous amène tout naturellement à vous dicter la règle suivante de notre sacro-saint code.</p>
+            <p>Car n’oubliez jamais la règle de notre sacro-saint code :</p>
             <p><strong>La Cloche de la Vertu et le Péril de la Lorgnette !</strong></p>
             <p>Sachez que la mixité aquatique est le naufrage absolu de la moralité française. Nos plages sont très strictement séparées par sexe. Lorsqu'une lourde cloche retentit au loin pour annoncer le bain exclusif des Dames, les Messieurs ont l'obligation absolue de tourner le dos à l'océan. Ils fileront se réfugier au Casino sans le moindre délai ! De plus, prenez garde : la longue-vue est considérée comme l'instrument du Diable en personne. L'usage de jumelles, de lorgnons ou de tout autre artifice d'optique pointé perfidement vers les cabines des dames est un crime de lèse-pudeur sévèrement réprimé !</p>
+            
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>Le chiffre de la première molette est un nombre impair.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -242,6 +266,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
