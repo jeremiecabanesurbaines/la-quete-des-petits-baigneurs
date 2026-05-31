@@ -39,7 +39,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 4px;
-            margin-bottom: 20px; /* Légèrement réduit pour rapprocher le texte */
+            margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
@@ -124,6 +124,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -152,9 +168,17 @@
         <div id="message-resultat">
             <h3>Bravo !</h3>
             <p>De l'autre côté de ce passage, admirez l'architecture de la villa dressée fièrement face à la puissance indomptable de l'océan. Voici la splendide Villa Neptune. Il s'agit de l'archétype même et parfait de la grande villa balnéaire de notre chère Belle Époque, typique des années 1900 ! Spécialement conçue pour l'élite de la grande villégiature, elle affiche sans complexe des volumes cossus et rassurants. Ses larges et somptueuses terrasses sont délibérément orientées pour dominer le paysage marin et surveiller l'horizon agité. Mais n'oubliez jamais que, même face au pire des drames se déroulant sous vos yeux, l'élégance bourgeoise doit primer sur la panique !</p>
-            <p>D'où notre règle inflexible concernant le protocole.</p>
+            <p>D'où cette règle inflexible concernant le protocole.</p>
             <p><strong>Le Sauvetage et de la Bienséance !</strong></p>
             <p>Depuis ces hautes terrasses, on observe parfois, hélas, des scènes de baignade tragiques au large. En cas de noyade avérée d'une Dame de bonne condition, la morale de notre station reste de marbre. Le sauveteur masculin de service est tenu d'intervenir courageusement, mais en détournant soigneusement son regard. Il s'assurera avant toute chose que les plombs de la jupe de la victime évanouie sont toujours parfaitement en place avant de la hisser sur le sable. Le scandale public est bien pire que la noyade !</p>
+            
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>La deuxième molette est un multiple de 3.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -196,6 +220,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
