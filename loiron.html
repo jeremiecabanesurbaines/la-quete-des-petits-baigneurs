@@ -37,7 +37,7 @@
 
         /* --- Animation Tilt --- */
         .tilt-anim {
-            display: inline-block; /* Requis pour appliquer une transformation (rotation) sur du texte */
+            display: inline-block;
             animation: tilt 3s infinite ease-in-out;
         }
 
@@ -47,7 +47,7 @@
             10% { transform: rotate(15deg); }
             15% { transform: rotate(-10deg); }
             20% { transform: rotate(10deg); }
-            25%, 100% { transform: rotate(0deg); } /* L'animation s'arrête ici et attend la fin des 3s pour recommencer */
+            25%, 100% { transform: rotate(0deg); }
         }
 
         .fw-light { font-weight: 300; }
@@ -123,6 +123,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -146,18 +162,24 @@
 
         <div id="message-resultat">
             <h3>Bravo !</h3>
-            <p>Voici votre première règle de bonne conduite :</p>
             <p>Avant l'arrivée de nos élégantes cabines de bain, cette côte charentaise n'était que rudesse ! Elle appartenait exclusivement aux marins pêcheurs et aux ostréiculteurs. Non loin de vous, au nord, le port du Loiron. Ses cabanes à carrelets témoignent encore de cette vie paysanne et maritime d'autrefois, bien loin de nos mondanités actuelles. Mais figurez-vous que ces marins robustes ont trouvé une toute nouvelle vocation florissante ! Ils sont devenus nos indispensables "guides-baigneurs". Attention toutefois, avec eux, point de délicatesse ou de manières de salon !</p>
-            <p>Ce qui nous amène à découvrir la toute première règle de notre prestigieux code de bonne conduite balnéaire.</p>
             <p><strong>Le Baptême Brutal du Piqueux !</strong></p>
             <p>Sachez que l'immersion timide de l'orteil est passible de lourdes sanctions. L'eau froide de l'Atlantique, cela se subit avec la plus grande bravoure ! Il est donc formellement interdit d'entrer dans l'eau à son propre rythme. Les "Piqueux", ces anciens marins aux bras noueux comme des cordages, vous attraperont fermement par les aisselles. Ils vous jetteront brutalement la tête la première sous la vague déferlante. C'est une manipulation absolument essentielle pour provoquer la fameuse "réaction salutaire" prescrite par nos médecins ! Ne criez pas, retenez votre souffle, c'est pour votre bien.</p>
+            
+            <!-- Nouvel encart pour l'indice -->
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>La troisième molette du cadenas est figée sur le chiffre 2.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         let tentativesRestantes = 4;
         
-        // Modification 3 : La réponse acceptée est maintenant "fleur"
         const reponsesAcceptees = ["fleur"]; 
 
         function verifierReponse() {
@@ -189,6 +211,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
