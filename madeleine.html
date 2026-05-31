@@ -131,6 +131,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- Style de l'encart Indice --- */
+        .encart-indice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #texte-indice {
+            display: none;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -159,10 +175,18 @@
 
         <div id="message-resultat">
             <h3>Bravo !</h3>
-            <p>De l'autre côté de ce passage, admirez l'architecture de la villa dressée fièrement face à la puissance indomptable de l'océan. Voici la splendide Villa Neptune. Il s'agit de l'archétype même et parfait de la grande villa balnéaire de notre chère Belle Époque, typique des années 1900 ! Spécialement conçue pour l'élite de la grande villégiature, elle affiche sans complexe des volumes cossus et rassurants. Ses larges et somptueuses terrasses sont délibérément orientées pour dominer le paysage marin et surveiller l'horizon agité. Mais n'oubliez jamais que, même face au pire des drames se déroulant sous vos yeux, l'élégance bourgeoise doit primer sur la panique !</p>
-            <p>D'où notre règle inflexible concernant le protocole.</p>
-            <p><strong>Le Sauvetage et de la Bienséance !</strong></p>
-            <p>Depuis ces hautes terrasses, on observe parfois, hélas, des scènes de baignade tragiques au large. En cas de noyade avérée d'une Dame de bonne condition, la morale de notre station reste de marbre. Le sauveteur masculin de service est tenu d'intervenir courageusement, mais en détournant soigneusement son regard. Il s'assurera avant toute chose que les plombs de la jupe de la victime évanouie sont toujours parfaitement en place avant de la hisser sur le sable. Le scandale public est bien pire que la noyade !</p>
+            <p>La croissance tout bonnement exponentielle de notre belle station balnéaire a nécessité quelques ajustements spirituels d'envergure. Il a fallu rapidement ordonner la construction de cette très imposante église Sainte-Madeleine pour accueillir dignement la ferveur de nos riches estivants. Car la villégiature et les bains de mer n'excluent en rien la foi fervente, ni la plus stricte rigueur morale ! N'oubliez jamais que la mer est une création divine dotée de puissantes vertus curatives, et non un vulgaire terrain de jeu pour enfants dissipés.</p>
+            <p>Prenez donc bonne note de cette nouvelle règle fondamentale.</p>
+            <p><strong>De l'Ordonnance Médicale et de la Flânerie Aquatique !</strong></p>
+            <p>Sachez que l'immersion purement récréative est considérée comme une véritable hérésie psychiatrique. Quiconque s'aventurera dans l'eau salée par simple plaisir du jeu sera immédiatement arrêté et renvoyé chez lui par le tout premier train ! L'océan est une austère officine médicale, pas un charmant salon de thé mondain. Pour tremper un orteil, vous devez impérativement détenir l'ordonnance dument tamponnée par le Médecin Inspecteur des Bains. Les gloussements, les éclaboussures ludiques et autres conversations frivoles entre deux vagues glaçantes sont formellement proscrits.</p>
+            
+            <div class="encart-indice">
+                <button id="btn-indice" onclick="afficherIndice()">Obtenir mon indice</button>
+                <div id="texte-indice">
+                    <p>Voici votre indice : <strong>La deuxième molette est un nombre impair.</strong></p>
+                    <p><em>Conservez-le précieusement pour espérer ouvrir le cadenas du coffre.</em></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -214,6 +238,12 @@
                     msgErreur.textContent = "Vous n'avez plus de tentatives ! L'énigme est bloquée.";
                 }
             }
+        }
+
+        // Fonction pour afficher l'indice
+        function afficherIndice() {
+            document.getElementById("btn-indice").style.display = "none";
+            document.getElementById("texte-indice").style.display = "block";
         }
 
         document.getElementById("reponse-input").addEventListener("keypress", function(event) {
